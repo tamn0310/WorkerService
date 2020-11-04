@@ -1,8 +1,7 @@
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using WorkerService.RabbitMQ;
 
-namespace WorkerService.Core
+namespace WorkerService.API
 {
     public class Program
     {
@@ -13,9 +12,9 @@ namespace WorkerService.Core
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    services.AddHostedService<Subscriber>();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }
